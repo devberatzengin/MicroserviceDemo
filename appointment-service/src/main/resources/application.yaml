@@ -1,0 +1,43 @@
+server:
+  port: 8083 # 📅 Appointment-service 8083'ten yayında
+
+spring:
+  application:
+    name: appointment-service
+
+  datasource:
+    # 🚨 DİKKAT: Docker'da dışarı açtığımız 5433 portuna bağlanıyor kanka!
+    url: jdbc:postgresql://localhost:5433/medix_appointment_db
+    username: appointment_user
+    password: appointment_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.devberatzengin.appointmentservice: DEBUG
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr([%thread]){magenta} %clr(%-5level){yellow} %clr(%logger{36}){cyan} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/appointment-service.log
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  packages-to-scan: org.devberatzengin.controller
