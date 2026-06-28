@@ -22,7 +22,7 @@ services:
       POSTGRES_USER: appointment_user
       POSTGRES_PASSWORD: appointment_password
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
       - appointment_db_data:/var/lib/postgresql/data
 
